@@ -1,0 +1,11 @@
+### GET /api/user
+GET http://localhost:3000/api/user
+
+### POST /api/user
+POST http://localhost:3000/api/user
+Content-Type: application/json
+```json
+{
+    "name": "John Doe",
+    "email": "hola@gmail.com",
+} 
