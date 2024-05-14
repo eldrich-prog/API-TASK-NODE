@@ -1,24 +1,16 @@
-import { Router, Request, Response } from "express";
 import router from "./router.instance";
-import prisma from "../db/prisma.instance";
+import validateSchema from "../middlewares/safeParse.validator";
+import userSchema from "../schemas/user.schema";
+import UserHttpController from "../controllers/user.controller";
+
+const HttpController = new UserHttpController();
 
 
+router.post('/user', validateSchema(userSchema), HttpController.post);
+router.get('/user', HttpController.get);
+router.put('/user/:id', validateSchema(userSchema), HttpController.put);
+router.delete('/user/:id', HttpController.delete);
 
 
-router.get('/user', async (req: Request, res: Response) => {
-    const products = await prisma.user.findMany()
-    res.json(products)
-});
-
-router.post('/user', async (req: Request, res: Response) => {
-    const newClient = await prisma.user.create({
-        data: req.body
-    });
-    res.status(201).json({ message: 'User created', newClient });
-});
-
-router.put('/user', (req: Request, res: Response) => {
-    res.send('Put request');
-});
 
 export default router;

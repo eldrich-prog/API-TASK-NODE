@@ -3,22 +3,17 @@ import router from "./router.instance";
 import prisma from "../db/prisma.instance";
 import validateSchema from "../middlewares/safeParse.validator";
 import postSchema from "../schemas/post.schema";
-import { createPost } from "../controllers/post.controller";
 
-router.post('/post', validateSchema(postSchema), createPost);
+import PostHttpController from "../controllers/post.controller";
 
-router.get('/post', async (req:Request, res:Response) => {
-    const allPosts = await prisma.post.findMany()
-    res.status(200).json(allPosts);
-});
+const HttpController = new PostHttpController();
 
-router.put('/post', (req:Request, res:Response) => {
-    res.send('Put request');
-});
 
-router.delete('/post', (req:Request, res:Response) => {
-    res.send('Delete request');
-});
+router.post('/post', validateSchema(postSchema), HttpController.post);
+router.get('/post', HttpController.get);
+router.put('/post/:id',validateSchema(postSchema), HttpController.put);
+router.delete('/post/:id', HttpController.delete);
+
 
 
 export default router;

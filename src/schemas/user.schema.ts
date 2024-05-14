@@ -1,8 +1,8 @@
 import { z } from 'zod';
 enum Role {
-    ADMIN,
-    USER,
-    GUEST
+    ADMIN = "ADMIN" ,
+    USER = "USER",
+    GUEST = "GUEST"
 }
 
 const userSchema = z.object({
