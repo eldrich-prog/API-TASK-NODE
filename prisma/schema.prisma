@@ -21,7 +21,6 @@ model User {
   posts         Post[]
   groups        Group[]
   Matriculation Matriculation[]
-  Evaluation    Evaluation[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 }
@@ -40,6 +39,7 @@ model Task_Type {
   id        Int      @id @default(autoincrement())
   name      String
   tasks     Task[]
+  rubric    Rubric[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -55,7 +55,7 @@ model State {
 model Group {
   id            Int             @id @default(autoincrement())
   name          String
-  admin         User           @relation(fields: [admin_id], references: [id])
+  admin         User            @relation(fields: [admin_id], references: [id])
   admin_id      Int
   tasks         Task[]
   Matriculation Matriculation[]
@@ -67,7 +67,6 @@ model Task {
   id           Int          @id @default(autoincrement())
   name_task    String
   description  String
-  percentage   Float
   requirements String?
   task_type    Task_Type?   @relation(fields: [task_type_id], references: [id])
   group        Group?       @relation(fields: [group_id], references: [id])
@@ -79,25 +78,55 @@ model Task {
 }
 
 model Matriculation {
-  id          Int      @id @default(autoincrement())
-  active      Boolean  @default(true)
-  user        User    @relation(fields: [mat_user_id], references: [id])
-  group       Group  @relation(fields: [group_id], references: [id])
+  id          Int          @id @default(autoincrement())
+  active      Boolean      @default(true)
+  user        User         @relation(fields: [mat_user_id], references: [id])
+  group       Group        @relation(fields: [group_id], references: [id])
   mat_user_id Int
   group_id    Int
+  Evaluation  Evaluation[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Temperature {
+  id          Int      @id @default(autoincrement())
+  temperature Float
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
+model Data {
+  id        Int      @id @default(autoincrement())
+  data      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Rubric {
+  id           Int          @id @default(autoincrement())
+  name         String
+  description  String
+  porcentage   Float
+  task_type    Task_Type    @relation(fields: [task_type_id], references: [id])
+  task_type_id Int
+  Evaluacion   Evaluation[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
 model Evaluation {
-  id          Int      @id @default(autoincrement())
-  task        Task    @relation(fields: [task_id], references: [id])
-  user        User    @relation(fields: [user_id], references: [id])
-  state       State   @relation(fields: [state_id], references: [id])
-  note        Float
-  task_id     Int
-  user_id     Int
-  state_id    Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               Int           @id @default(autoincrement())
+  task             Task          @relation(fields: [task_id], references: [id])
+  matriculation    Matriculation @relation(fields: [matriculation_id], references: [id])
+  state            State         @relation(fields: [state_id], references: [id])
+  rubric           Rubric        @relation(fields: [rubric_id], references: [id])
+  rubric_id        Int
+  note             Float
+  task_id          Int
+  matriculation_id Int
+  state_id         Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

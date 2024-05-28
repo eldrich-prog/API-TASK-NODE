@@ -18,7 +18,13 @@ class UserHttpController extends HttpInterface {
     }
 
     async put(req:Request, res:Response): Promise<void>{
-
+        const updateUser = await prisma.user.update({
+            where: {
+                id: parseInt(req.params.id)
+            },
+            data: req.body
+        })
+        res.status(201).json({message: 'user update', data: updateUser})
     }
 
     async delete(req:Request, res:Response): Promise<void>{
