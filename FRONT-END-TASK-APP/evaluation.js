@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', (id) => {
             const data = await response.json();
             console.log(data.evaluation);
             document.getElementById('select-button').style.display = 'none';
+            displayResults(data.evaluation[0]);
             if (data.evaluation.length === 0) {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'data-item';
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', (id) => {
         data.forEach(item => {
             const itemDiv = document.createElement('div');
             const rubrica = document.createElement('div');
-            
+
 
             rubrica.textContent = `${String(item.rubric.name).toUpperCase()}`;
             itemDiv.className = 'data-item';
@@ -66,8 +67,8 @@ document.addEventListener('DOMContentLoaded', (id) => {
         const div = document.createElement('br');
         evaluation.textContent = 'Actualizar';
         evaluation.classList.add('button-eval');
-        
-        
+
+
 
         const card = document.createElement('div');
         card.classList.add('card');
@@ -118,9 +119,31 @@ document.addEventListener('DOMContentLoaded', (id) => {
             card.removeChild(evaluation);
             card.appendChild(input);
             card.appendChild(save);
-            
-            var nota = document.querySelector('input').value;
-            console.log(`Nota: ${nota}`);
+
+            save.onclick = () => {
+                const apiUrlMatriculation = 'http://localhost:3000/api/evaluation/note/'; // Reemplaza con la URL de tu API
+                console.log(input.value);
+                fetch(apiUrlMatriculation + parametro, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ note: input.value })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    const update = document.createElement('span');
+                    update.textContent = 'Nota actualizada';
+                    card.appendChild(update);
+                    card.removeChild(input);
+                    card.removeChild(save);
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
 
             console.log(`Task parametro: ${selectedItem.data.id}`);
         };

@@ -72,6 +72,18 @@ class EvaluationHttpController extends HttpInterface {
         })
         res.status(201).json({message: 'evaluation update', data: updateEvaluation})
     }
+    async putNoteEvaluation(req:Request, res:Response): Promise<void>{
+
+        const updateEvaluation = await prisma.evaluation.update({
+            where: {
+                id: parseInt(req.params.id)
+            },
+            data: {
+                note: parseFloat(req.body.note)
+            }
+        })
+        res.status(201).json({message: 'evaluation update', data: updateEvaluation})
+    }
 
     async delete(req:Request, res:Response): Promise<void>{
         const deleteEvaluation = await prisma.evaluation.delete({
