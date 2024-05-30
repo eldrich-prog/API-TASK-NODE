@@ -9,13 +9,27 @@ class GroupHttpController extends HttpInterface {
         const AllGroups = await prisma.group.findMany()
         res.status(200).json({id: AllGroups})
     } 
-
-    async post(req:Request, res:Response): Promise<any>{
-        const newGroup = await prisma.group.create({
-            data: req.body
+    async getGroup(req:Request, res:Response): Promise<void>{
+        const getGroup = await prisma.group.findMany({
+            where:{
+                id: parseInt(req.params.id)
+            }
         })
-        res.status(200).json({id: newGroup})
+        res.status(200).json({id: getGroup})
     }
+    
+    async post(req:Request, res:Response): Promise<any>{
+        try{
+            const newGroup = await prisma.group.create({
+                data: req.body
+            })
+            res.status(200).json({id: newGroup})
+        }catch(err){
+            res.status(400).json({error: err})
+        }
+    }
+    
+
 
     async put(req:Request, res:Response): Promise<void>{
         const updateGroup = await prisma.group.update({

@@ -6,6 +6,7 @@ import dataRoutes from "./routes/data.routes";
 import evaluationRoutes from "./routes/evaluation.routes";
 import groupRoutes from "./routes/group.routes";
 import matriculationRoutes from "./routes/matriculation.routes";
+import taskRoutes from "./routes/task.routes";
 
 import cors from "cors"
 
@@ -22,6 +23,7 @@ app.use(cors());
 app.use('/api', evaluationRoutes);
 app.use('/api', groupRoutes);
 app.use('/api', matriculationRoutes);
+app.use('/api', taskRoutes);
 
 app.listen(PORT, () => {
     console.log(`[server]: Server is running at http://localhost:${PORT}`);

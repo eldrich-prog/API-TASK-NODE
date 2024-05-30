@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renderizado de Datos de una API</title>
+</head>
+<body>
+    <div id="dataContainer">Cargando datos...</div>
+    <button id="updateButton">Actualizar Datos</button>
+
+    <script>
+        const apiUrl = 'http://localhost:3000/api/group'; // Reemplaza con la URL de tu API
+
+        // Función para obtener los datos de la API
+        async function fetchData() {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    console.error('Error:', response.status);
+                    throw new Error('Error al obtener los datos');
+                }
+                const data = await response.json();
+                renderData(data.id);
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('dataContainer').textContent = 'Error al cargar los datos';
+            }
+        }
+
+        // Función para renderizar los datos en el contenedor
+        function renderData(data) {
+            const dataContainer = document.getElementById('dataContainer');
+            dataContainer.innerHTML = ''; // Limpiar contenido anterior
+
+            data.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.textContent = `ID: ${item.id}, Nombre: ${item.name}`;
+                dataContainer.appendChild(itemElement);
+            });
+        }
+
+        // Función para actualizar los datos en la API
+        async function updateData() {
+            try {
+                const id = "/1"; // ID del elemento a actualizar
+                const updatedData = { id: 1, name: 'HOLA' }; // Datos a enviar, ajusta según sea necesario
+                const response = await fetch(apiUrl+ id, {
+                    method: 'PUT', // Usa 'PUT' o 'PATCH' según la API
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedData)
+                });
+                if (!response.ok) {
+                    throw new Error('Error al actualizar los datos');
+                }
+                fetchData(); // Volver a cargar los datos después de actualizar
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Agregar evento al botón para actualizar los datos
+        document.getElementById('updateButton').addEventListener('click', updateData);
+
+        // Cargar datos al iniciar
+        fetchData();
+    </script>
+</body>
+</html>

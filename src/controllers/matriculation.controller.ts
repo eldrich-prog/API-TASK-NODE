@@ -26,7 +26,7 @@ class MatriculationHttpController extends HttpInterface {
 
 
     async post(req:Request, res:Response): Promise<any>{
-        const newMatriculation = await prisma.matriculation.create({
+        const newMatriculation = await prisma.matriculation.createMany({
             data: req.body
         })
         res.status(200).json({message: 'matriculation create', data: newMatriculation})

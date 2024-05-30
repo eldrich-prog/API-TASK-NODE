@@ -13,7 +13,8 @@ class EvaluationHttpController extends HttpInterface {
 
     async getGroupEvaluation(req:Request, res:Response): Promise<void>{
         console.log( req.query)
-        const { group_id, user_id } = req.query;
+        const { group_id, user_id, task_id } = req.query;
+
         const getGroupEvaluation = await prisma.matriculation.findFirstOrThrow({
             where:{
                 group_id: parseInt(group_id as string),
@@ -29,7 +30,8 @@ class EvaluationHttpController extends HttpInterface {
             },
             
             where:{
-                matriculation_id: getGroupEvaluation.id
+                matriculation_id: getGroupEvaluation.id,
+                task_id: parseInt(task_id as string)
             }
         })
 
@@ -51,16 +53,7 @@ class EvaluationHttpController extends HttpInterface {
             }
         })
 
-
-        console.log(evaluation)
-        res.status(200).json(evaluation.map((evaluation, index) => {
-            return {
-                id: evaluation.id,
-                rubric: rubric[index].name,
-                porcentage: rubric[index].porcentage,
-                note: evaluation.note
-            }
-        }))
+        res.status(200).json({evaluation: evaluation})
     }
 
     async post(req:Request, res:Response): Promise<any>{

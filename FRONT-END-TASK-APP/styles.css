@@ -1,0 +1,257 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #242222;
+    color: #000000;
+    font-size: medium;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.6;
+    padding: 0 20px;
+}
+
+.container {
+    display: flex;
+
+    justify-content: center;
+
+
+    min-height: 100vh;
+
+}
+
+.column {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    align-items:first baseline;
+    align-content:start;
+    padding: 100px;
+    min-width: 300px; /* Asegura que las columnas no sean demasiado estrechas en pantallas pequeñas */
+}
+.column-up {
+    flex: 3;
+
+    padding: 100px;
+    min-width: 300px; /* Asegura que las columnas no sean demasiado estrechas en pantallas pequeñas */
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    
+
+}
+
+/* Media query para diseño responsivo */
+@media screen and (max-width: 600px) {
+    .column {
+        flex: 1;
+        padding: 20px;
+    }
+    .column-up {
+        flex: 1;
+        padding: 20px;
+    }
+}
+
+#data-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    
+}
+ 
+.data-item {
+    margin: 5px 0;
+    padding: 10px;
+    border: 2px solid #e3e3e4;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 60%;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0 0 10px;
+    justify-content: center;
+    background-color: #edecf1;
+}
+
+.data-item:hover {
+    background-color: #242222;
+    
+    /* ForestGreen */
+    color: #FFFFFF;
+    /* Blanco para el texto */
+    border: 2px solid #e3e3e4;
+
+
+
+}
+.data-item-rubric {
+    margin: 5px 0;
+    padding: 10px;
+    border: 2px solid #e3e3e4;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 60%;
+    box-sizing: border-box;
+    text-align: center;
+    color: #0c0a0a;
+    justify-content: center;
+    background-color: #cccad1;
+}
+
+.data-item-rubric:hover {
+    background-color: #242222;
+    
+    /* ForestGreen */
+    color: #FFFFFF;
+    /* Blanco para el texto */
+    border: 2px solid #e3e3e4;
+
+
+
+}
+
+
+
+.selected {
+    background-color: #3f3c3c;
+    /* LimeGreen */
+    color: #ffffff;
+    /* Blanco para el texto */
+    border: 2px solid #e3e3e4;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Alto del contenedor, aquí es el 100% de la ventana */
+}
+
+button {
+
+    padding: 10px 20px;
+    background-color: #3d3fa8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+}
+
+button:hover {
+    background-color: #00346b;
+    transform: scale(1.02);
+}
+.button-eval {
+    padding: 10px 20px;
+    background-color: #53b48f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    align-items: center;
+    align-content: center;
+}
+.button-eval:hover {
+    padding: 10px 20px;
+    background-color: #35745c;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+
+.card {
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid #2e54a7;
+    border-radius: 15px;
+    background-color: #fafafa;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card h2 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.card p span {
+    font-weight: bold;
+}
+
+
+
+
+
+/* Estilo para el input */
+.styled-input {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/* Eliminar los botones de incremento/decremento en Chrome, Safari y Edge */
+.styled-input::-webkit-outer-spin-button,
+.styled-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Eliminar los botones de incremento/decremento en Firefox */
+.styled-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Estilo para el input en foco */
+.styled-input:focus {
+    border-color: #ff6f61;
+    box-shadow: 0 4px 6px rgba(255, 111, 97, 0.3);
+}
+
+/* Placeholder */
+.styled-input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
