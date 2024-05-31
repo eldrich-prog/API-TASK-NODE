@@ -79,7 +79,7 @@ p {
     flex-direction: column;
     align-items: center;
     margin: 20px 0;
-    
+
 }
  
 .data-item {
@@ -116,7 +116,7 @@ p {
     width: 60%;
     box-sizing: border-box;
     text-align: center;
-    color: #0c0a0a;
+    color: #422b2b;
     justify-content: center;
     background-color: #cccad1;
 }

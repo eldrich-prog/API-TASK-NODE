@@ -46,6 +46,18 @@ document.addEventListener('DOMContentLoaded', (id) => {
 
 
         });
+        const note = document.createElement('span');
+        sumaFinal = 0;
+        porcentage = 0;
+        data.forEach(item => {
+            sumaFinal+= item.note;
+            porcentage+= item.rubric.porcentage;
+        });
+        note.textContent = `CALIFICACIÓN: ${sumaFinal}/ ${porcentage}`;
+        note.classList.add('data-item');
+        dataContainer.appendChild(note);
+
+
     }
 
 
@@ -138,7 +150,7 @@ document.addEventListener('DOMContentLoaded', (id) => {
                     card.appendChild(update);
                     card.removeChild(input);
                     card.removeChild(save);
-
+                    window.location.reload();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
